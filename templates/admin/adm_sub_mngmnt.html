@@ -1,0 +1,37 @@
+{% extends '/admin/blank.html' %} {% block body %}
+<form id="form1" name="form1" method="post" action="/adm_sub_mngmnt">
+  <table class="table-bordered table">
+    <tr>
+      <td>Course Name:</td>
+      <td>
+        <select name="cou" id="cou" class="form-control">
+            {% for d in data %}
+            <option value="{{ d[0] }}">{{ d[2] }}</option>
+            {% endfor %}
+      </select></td>
+    </tr>
+    <tr>
+      <td>Subject Name:</td>
+      <td>
+      <input type="text" name="subname" id="subname" class="form-control" reqiured/></td>
+    </tr>
+    <tr>
+      <td>Subject Code:</td>
+      <td>
+      <input type="text" name="subcode" id="subcode" class="form-control" required/></td>
+    </tr>
+  <tr>
+      <td>Sem:</td>
+      <td>
+        <select name="sem" id="sem" class="form-control">
+            {% for d in range(1,7) %}
+            <option value="{{ d }}">{{ d }}</option>
+            {% endfor %}
+      </select></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><input type="submit" name="button" id="button" value="Add" class="btn btn-primary"/></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

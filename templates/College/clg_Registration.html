@@ -1,0 +1,96 @@
+{% extends '/admin/blank.html' %} {% block body %}
+
+<form action="/add_clg" method="post" enctype="multipart/form-data" name="form1" id="form1">
+  <table class="table table-bordered">
+
+    <tr>
+      <td>College Name:</td>
+      <td><label for="textfield"></label>
+      <input type="text" name="clgname" id="clgname"
+      required pattern="[A-Z a-z]{3,50}"
+      placeholder="Enter College Name"
+             class="form-control"
+      /></td>
+    </tr>
+
+    <tr>
+      <td>Phone number:</td>
+      <td><label for="textfield2"></label>
+      <input type="text" name="phnum" id="phnum" maxlength="10"
+      required pattern="[06789][0-9]{9}"
+      placeholder="Enter Phone Number"
+             class="form-control"
+      /></td>
+    </tr>
+
+    <tr>
+      <td>Email:</td>
+      <td><label for="textfield3"></label>
+      <input type="email" name="email" id="email"
+       required
+       placeholder="Enter Email Address" class="form-control"
+      /></td>
+    </tr>
+
+    <tr>
+      <td>Place:</td>
+      <td><label for="textfield4"></label>
+      <input type="text" name="place" id="place"
+      required pattern="[A-Z a-z]{3,25}"
+      placeholder="Enter Place Name" class="form-control"
+      /></td>
+    </tr>
+    <tr>
+      <td>Pin:</td>
+      <td><label for="textfield5"></label>
+      <input type="text" name="pin" id="pin" maxlength="6"
+       required pattern="[0-9]{6}"
+      placeholder="Enter Pin Code" class="form-control"
+      /></td>
+    </tr>
+    <tr>
+      <td>Post:</td>
+      <td><label for="textfield6"></label>
+      <input type="text" name="post" id="post"
+      required pattern="[A-Z a-z]{3,25}"
+      placeholder="Enter Post Name" class="form-control"
+      /></td>
+    </tr>
+    <tr>
+      <td>District:</td>
+      <td><label for="textfield6"></label>
+      <input type="text" name="district" id="district"
+      required pattern="[A-Z a-z]{3,25}"
+      placeholder="Enter District Name" class="form-control"
+      /></td>
+    </tr>
+        <tr>
+      <td>State:</td>
+      <td><label for="textfield6"></label>
+      <input type="text" name="state" id="state"
+      required pattern="[A-Z a-z]{3,25}"
+      placeholder="Enter State Name" class="form-control"
+      /></td>
+    </tr>
+
+
+
+
+
+
+
+
+
+    <tr>
+      <td>Photo:</td>
+      <td><label for="fileField"></label>
+      <input type="file" name="photo" id="photo" required class="form-control" /></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><input type="submit" name="button" id="button" class="btn btn-primary" value="Register" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

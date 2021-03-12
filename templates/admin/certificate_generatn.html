@@ -1,0 +1,145 @@
+{% extends '/admin/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="/adm_add_ext">
+  <table class="table table-bordered">
+  <tr>
+      <td>College Name</td>
+      <td>
+        <select name="clg" id="clg" required class="form-control">
+        <option selected="selected">--select--</option>
+             {% for d in data %}
+            <option value="{{ d[8] }}">{{ d[1] }}</option>
+            {% endfor %}
+        </select></td>
+    </tr>
+
+    <tr>
+      <td>Department</td>
+      <td>
+        <select name="dept" id="dept2" required class="form-control">
+        <option selected="selected">--select--</option>
+{#            {% for d in data %}#}
+{#            <option value="{{ d[0] }}">{{ d[1] }}</option>#}
+{#            {% endfor %}#}
+        </select></td>
+    </tr>
+    <tr>
+      <td>Course Name</td>
+      <td>
+        <select name="cou" id="cou" required class="form-control">
+{#           {% for d in data2 %}#}
+{#           <option value="{{ d[0] }}">{{ d[2] }}</option>#}
+{#            {% endfor %}#}
+        </select></td>
+    </tr>
+    <tr>
+    </tr>
+  </table>
+  <p>&nbsp;</p>
+  <table class="table table-bordered" id="t1">
+{#    <tr style="color: white" bgcolor="black" >#}
+{#      <th>S/No</th>#}
+{#      <th>Photo</th>#}
+{#      <th>Student Name</th>#}
+{#      <th>Course Name</th>#}
+{#      <th>Department name</th>#}
+{#      <th>College name</th>#}
+{#        <td>Sem</td>#}
+{#      <td>&nbsp;</td>#}
+{#    </tr>#}
+{#      {% for i in data4 %}#}
+{#  <tr style="color: black" bgcolor="#a9a9a9">#}
+{##}
+{#      <td>{{ loop.index }}</td>#}
+{#      <td><img src="{{ i[0] }}" height="100" width="100"></td>#}
+{#      <td>{{ i[1] }}</td>#}
+{#      <td>&nbsp;{{ i[2] }}</td>#}
+{#      <td>{{ i[3] }}</td>#}
+{#      <td>{{ i[4] }}&nbsp;</td>#}
+{#      <td><a href="/ent_ext/{{ i[6] }}" class="btn btn-success">Add</a></td>#}
+{##}
+{#    </tr>#}
+{#      {% endfor %}#}
+
+  </table>
+</form>
+<script src="/static/jquery.js"></script>
+<script>
+
+     $(document).ready(function () {
+
+        $("#clg").change(function () {
+            colgid = $("#clg").val()
+            $.ajax({
+                url: '/ajax_dept_by_clg',
+                type: 'post',
+                data: {clgid: colgid},
+                success: function (respons) {
+                    len = respons.length;
+                    $("#dept2").empty();
+                    $("#dept2").append('<option selected="selected">--select--</option>')
+                    for (var i = 0; i <= len; i++) {
+                        did = respons[i]["d_id"]
+                        dname = respons[i]["d_name"]
+                        $("#dept2").append('<option value=' + did + '>' + dname + '</option>')
+                    }
+
+                }, error: function (error) {
+
+                }
+
+            });
+        });
+
+            $("#dept2").change(function () {
+                deptid = $(this).val()
+                colgid = $("#clg").val()
+                $.ajax({
+                    url: '/adm_ajax_course_call_internal',
+                    type: 'post',
+                    data: {clgid: colgid, dptid: deptid},
+                    success: function (respons) {
+                        len = respons.length;
+                        $("#cou").empty();
+                        for (var i = 0; i <= len; i++) {
+                            courseid = respons[i]["c_id"]
+                            coursename = respons[i]["c_name"]
+                            $("#cou").append('<option value=' + courseid + '>' + coursename + '</option>')
+                        }
+
+                    }, error: function (error) {
+
+                    }
+
+                });
+            });
+
+                     $("#cou").change(function () {
+                cou = $(this).val()
+                $.ajax({
+                    url: '/adm_ajax_studdd',
+                    type: 'post',
+                    data: {cou: cou},
+                    success: function (respons) {
+                        len = respons.length;
+                        $("#t1").empty();
+                        $("#t1").append('<tr style="color: white" bgcolor="black" ><th>S/No</th><th>Photo</th><th>Student Name</th><th>Course Name</th><th>Department name</th><th>College name</th><th>Sem</th><td>&nbsp;</td></tr>')
+                        for (var i = 0; i <= len; i++) {
+                            photo = respons[i]["photo"]
+                            coursename = respons[i]["c_name"]
+                            name=respons[i]["s_name"]
+                            ddep=respons[i]['d_name']
+                            col=respons[i]['col_name']
+                            sem=respons[i]['sem']
+                            logid=respons[i]['login_id']
+                            $("#t1").append('<tr style="color: black" bgcolor="#a9a9a9"><td>'+i+1+'</td><td><img src="'+photo+'" height="100" width="100"></td><td>'+name+'</td><td>'+coursename+'</td><td>'+ddep+'</td><td>'+col+'</td><td>'+sem+'</td><td><a href="/adm_cert_gen/'+logid+'" dd="gen" class="btn btn-info">Generate</a></td></tr>')
+                        }
+                    }, error: function (error) {
+
+                    }
+
+                });
+            });
+        });
+</script>
+{% endblock %}

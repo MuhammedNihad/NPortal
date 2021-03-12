@@ -1,0 +1,119 @@
+{% extends '/admin/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="/adm_call_internal">
+  <table class="table table-bordered">
+    <tr>
+      <td>College Name:</td>
+      <td><label for="select"></label>
+        <select name="clg" id="clg" class="form-control">
+        <option selected="selected">--select--</option>
+            {% for d in data %}
+            <option value="{{ d[8] }}">{{ d[1] }}</option>
+            {% endfor %}
+        </select></td>
+    </tr>
+      <tr>
+          <td>Department Name:</td>
+          <td>
+              <select name="dpt" id="dpt" class="form-control">
+                  <option selected="selected">--select--</option>
+{#                  {% for d in data2 %}#}
+{#            <option value="{{ d[0] }}">{{ d[1] }}</option>#}
+{#            {% endfor %}#}
+              </select>
+          </td>
+      </tr>
+      <tr>
+          <td>Course Name:
+          </td>
+          <td>
+              <select name="cou" id="cou" class="form-control">
+                  <option selected="selected">--select--</option>
+{#                  {% for d in data3 %}#}
+{#            <option value="{{ d[0] }}">{{ d[2] }}</option>#}
+{#            {% endfor %}#}
+              </select>
+          </td>
+      </tr>
+      <tr>
+       <tr>
+      <td>Sem</td>
+      <td><label for="select13"></label>
+        <select name="sem" id="sem" class="form-control">
+            <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select></td>
+    </tr>
+          <td>Year:</td>
+          <td>
+              <select name="yr" id="yr" class="form-control">
+                  {% for d in range(2018,2028) %}
+            <option value="{{ d }}">{{ d }}</option>
+            {% endfor %}
+              </select>
+          </td>
+      </tr>
+    <tr>
+      <td colspan="2"><center><input type="submit" name="button" id="button" class="btn btn-info" value="Send Call" /></center></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+<script src="/static/jquery.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+        $("#clg").change(function () {
+            colgid = $("#clg").val()
+            $.ajax({
+                url: '/ajax_dept_by_clg',
+                type: 'post',
+                data: {clgid: colgid},
+                success: function (respons) {
+                    len = respons.length;
+                    $("#dpt").empty();
+                    $("#dpt").append('<option selected="selected">--select--</option>')
+                    for (var i = 0; i <= len; i++) {
+                        did = respons[i]["d_id"]
+                        dname = respons[i]["d_name"]
+                        $("#dpt").append('<option value=' + did + '>' + dname + '</option>')
+                    }
+
+                }, error: function (error) {
+
+                }
+
+            });
+        });
+
+            $("#dpt").change(function () {
+                deptid = $(this).val()
+                colgid = $("#clg").val()
+                $.ajax({
+                    url: '/adm_ajax_course_call_internal',
+                    type: 'post',
+                    data: {clgid: colgid, dptid: deptid},
+                    success: function (respons) {
+                        len = respons.length;
+                        $("#cou").empty();
+                        for (var i = 0; i <= len; i++) {
+                            courseid = respons[i]["c_id"]
+                            coursename = respons[i]["c_name"]
+                            $("#cou").append('<option value=' + courseid + '>' + coursename + '</option>')
+                        }
+
+                    }, error: function (error) {
+
+                    }
+
+                });
+            });
+        });
+</script>
+{% endblock %}

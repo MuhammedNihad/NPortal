@@ -1,0 +1,71 @@
+{% extends '/College/blank.html' %} {% block body %}
+
+<form action="/update_data" method="post" enctype="multipart/form-data"  name="form1" id="form1">
+  <table class="table table-bordered">
+    <tr><input type="hidden" name="stfid" value="{{ data[0] }}">
+      <td width="21">Staff Name:</td>
+      <td width="44"><label for="stfname"></label>
+      <input type="text" name="stfname" id="stfname" value="{{ data[1] }}" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>Department Name:</td>
+        <td><select name="dep" class="form-control">
+        <option value="{{ data[2] }}">{{ data[14] }}</option>
+            {% for i in data2 %}
+            <option value="{{ i[0] }}">{{ i[1] }}</option>
+            {% endfor %}
+        </select> </td>
+    </tr>
+    <tr>
+      <td>Gender:</td>
+      <td>
+          <input type="radio"{% if data[3]=="Male" %} checked="checked" {% endif %}  name="radio" id="gender" value="Male" >Male <br >
+        <input type="radio" {% if data[3]=="Female" %} checked="checked" {% endif %} name="radio" id="Female" value="Female" >Female
+      </td>
+    </tr>
+    <tr>
+      <td>House Name:</td>
+      <td><label for="houname"></label>
+      <input type="text" name="houname" id="houname" value="{{ data[4] }}" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>Pin:</td>
+      <td><label for="pin"></label>
+      <input type="text" name="pin" id="pin" value="{{ data[6] }}" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>Post:</td>
+      <td><label for="post"></label>
+      <input type="text" name="post" id="post" value="{{ data[5] }}" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>Phone number:</td>
+      <td><label for="phnum"></label>
+      <input type="text" name="phnum" id="phnum" value="{{ data[7] }}" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Qualification:</td>
+      <td><label for="qual"></label>
+      <input type="text" name="qual" id="qual" value="{{ data[10] }}" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Experiance:</td>
+      <td><label for="exp"></label>
+      <input type="text" name="exp" id="exp" value="{{ data[11] }}" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Photo:</td>
+      <td><label for="photo"></label>
+      <input type="file" name="photo" id="photo" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td align="center" colspan="2"><p>
+          <input type="submit" name="button" id="button" value="Update" class="btn btn-primary"/>&nbsp; &nbsp;
+      </td>
+    </tr>
+  </table>
+</form>
+
+</body>
+</html>
+{% endblock %}

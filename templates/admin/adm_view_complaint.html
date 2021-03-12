@@ -1,0 +1,31 @@
+{% extends '/admin/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="">
+  <table class="table-bordered table">
+
+<tr style="color: black" bgcolor="#a9a9a9">
+      <th width="24">S/No</th>
+      <th width="50">Student Name</th>
+      <th width="62">Complaint</th>
+      <th width="26">date</th>
+      <th width="19">Reply</th>
+    </tr>
+      {% for i in data %}
+
+<tr style="color: black" bgcolor="#a9a9a9">
+
+      <td>&nbsp;{{ loop.index }}</td>
+      <td>&nbsp;{{ i[0] }}</td>
+      <td>&nbsp;{{ i[1] }}</td>
+
+      <td>{{ i[3] }}</td>
+        {% if i[5]=="pending" %}
+      <td><a href="/reply/{{ i[4] }}" class="btn btn-info">Reply</a></td>
+    {% else %}
+<td>{{ i[6] }}</td>
+    {% endif %}
+    </tr>
+       {% endfor %}
+  </table>
+</form>
+{% endblock %}

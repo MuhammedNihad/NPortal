@@ -1,0 +1,5 @@
+python 3.6
+
+pip install dlib
+pip install cmake
+pip install scikit-build

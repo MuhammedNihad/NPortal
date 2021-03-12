@@ -1,0 +1,28 @@
+{% extends '/admin/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="/adm_enter_ext">
+  <table class="table table-bordered">
+    <tr>
+      <td>Subject Name</td>
+        <td>
+            <select name="sub" id="sub" class="form-control">
+            <option selected="selected">--select--</option>
+                {% for d in data %}
+                <option value="{{ d[0] }}">{{ d[2] }}</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Mark</td>
+      <td><label for="mark"></label>
+      <input type="text" name="mark" id="mark" required class="form-control"/></td>
+    </tr>
+    <tr>
+      <td align="center" colspan="2"><input type="submit" name="add" id="add" class="btn btn-primary" value="Add" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

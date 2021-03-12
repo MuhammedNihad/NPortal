@@ -1,0 +1,28 @@
+{% extends '/admin/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="/view_suballo">
+  <table class="table table-bordered">
+    <tr style="color: white" bgcolor="black" >>
+      <th>Id</th>
+      <th>Course Name</th>
+      <th>Subject</th>
+      <th>Semster</th>
+      <td>&nbsp;</td>
+       <td>&nbsp;</td>
+    </tr>
+      {% for i in data %}
+    <tr style="color: white" bgcolor="black" >
+
+      <td>{{ loop.index }}</td>
+      <td>&nbsp;{{ i[0] }}</td>
+      <td>{{ i[1] }}</td>
+      <td>&nbsp;{{ i[2] }}</td>
+       <td><a href="/edit_suballoc/{{ i[4] }}" class="btn btn-info">Edit</a></td>
+      <td><a href="/delete_suballoc/{{ i[4] }}" class="btn btn-danger">Delete</a></td>
+    </>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

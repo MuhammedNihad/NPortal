@@ -1,0 +1,57 @@
+
+{% extends '/College/blank.html' %} {% block body %}
+<form method="post" action="/collegeviewsubjects_post">
+    <table class="table">
+    <tr>
+            <td width="150px">CourseName</td>
+            <td>
+                <select name="crsname" class="form-control">
+                    {% for i in crs %}
+                        <option value="{{ i[0] }}">{{ i[2] }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+
+        </tr>
+    <tr>
+        <td>Semester</td>
+        <td>
+            <select name="seme" class="form-control">
+                <option value="1">Sem1</option>
+                <option value="2">Sem2</option>
+                <option value="3">Sem3</option>
+                <option value="4">Sem4</option>
+                <option value="5">Sem5</option>
+                <option value="6">Sem6</option>
+
+            </select>
+
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="submit" value="Show" class="btn btn-success"></td>
+    </tr>
+    </table>
+<br>
+<br>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>SubjectCode</th>
+        <th>Subject name</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {%  for i in ressubjects %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td width="150px">{{ i[3]  }}</td>
+        <td>{{ i[2]  }}</td>
+        <td width="150px"><a href="/collegestudymaterialsload/{{ i[0] }}">New Material</a> </td>
+        <td width="150px"><a href="/college_studymaterialsupload_view">View Material</a> </td>
+    </tr>
+    {% endfor %}
+</table>
+</form>
+{% endblock %}

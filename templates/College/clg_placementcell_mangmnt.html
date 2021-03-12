@@ -1,0 +1,45 @@
+{% extends '/College/blank.html' %} {% block body %}
+
+<form action="/placement_reg" method="post" enctype="multipart/form-data"  name="form1" id="form1">
+  <table class="table table-bordered">
+    <tr>
+      <td>Head Name:</td>
+      <td><input type="text" name="hdname" id="hdname" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Gender:</td>
+        <td>
+            <input type="radio" name="radio" id="male" value="male" checked/>Male<br>
+           <input type="radio" name="radio" id="female" value="female" />Female
+      </td>
+    </tr>
+    <tr>
+      <td>House name:</td>
+      <td><input type="text" name="hname" id="hname" class="form-control" /></td>
+    </tr>
+    <tr>
+      <td>Post:</td>
+      <td><input type="text" name="post" id="post" class="form-control" /></td>
+    </tr>
+    <tr>
+      <td>Pin:</td>
+      <td><input type="text" name="pin" id="pin" class="form-control" /></td>
+    </tr>
+    <tr>
+      <td>Contact:</td>
+      <td><input type="text" name="cont" id="cont" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><input type="text" name="email" id="email" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Photo:</td>
+      <td><input type="file" name="photo" id="photo" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><input type="submit" name="button" id="button" class="btn btn-primary" value="Register" /></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends '/College/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="">
+  <table class="table table-bordered">
+   <tr style="color: white" bgcolor="black" >
+      <th>Sl. No.</th>
+      <th>Subject Name</th>
+      <th>Subject Code</th>
+      <th>Internal Mark</th>
+    </tr>
+      {% for i in data %}
+    <tr style="color: black" bgcolor="#a9a9a9">
+    <td>{{ loop.index  }}</td>
+      <td>&nbsp;{{ i[0] }}</td>
+      <td>&nbsp;{{ i[1] }}</td>
+      <td>&nbsp;{{ i[2] }}</td>
+    </tr>
+      {% endfor %}
+  </table>
+  <p>&nbsp;</p>
+</form>
+{% endblock %}

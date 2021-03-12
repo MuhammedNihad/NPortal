@@ -1,0 +1,23 @@
+{% extends '/College/blank.html' %} {% block body %}
+<form id="form1" name="form1" method="post" action="">
+  <table class="table table-bordered">
+    <tr style="color: white" bgcolor="black" >
+      <th>S/no</td>
+      <th>Comment</td>
+      <td>&nbsp;Date</td>
+      <td>&nbsp;Student</td>
+    </tr>
+      {% for i in res %}
+    <tr style="color: black" bgcolor="#a9a9a9">
+     <td>{{ loop.index }}</td>
+      <td>{{ i[2] }}</td>
+        <td>{{ i[3] }}</td>
+        <td>{{ i[12] }}</td>
+<!--        <td><a href="/clg_view_comments/{{i[0]}}" class="btn btn-primary">Comments</a></td>-->
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

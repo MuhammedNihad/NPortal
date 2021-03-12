@@ -1,0 +1,15 @@
+{% extends '/admin/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="/update_dpt">
+  <table class="table table-bordered">
+    <tr >
+      <td>Department Name:<input type="hidden" name="did" value="{{ data[0] }}"></td>
+      <td>
+      <input type="text" class="form-control" name="dptname" id="dptname" value="{{ data[1]}}" /></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><input type="submit" name="button" class="btn btn-primary" id="button" value="Update" /></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

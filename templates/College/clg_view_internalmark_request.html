@@ -1,0 +1,43 @@
+{% extends '/College/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="/clg_internal">
+  <table class="table table-bordered">
+    <tr>
+      <td>Course</td>
+      <td><label for="select12"></label>
+        <select name="cou" id="cou" class="form-control">
+            {% for d in data2 %}
+            <option value="{{ d[0] }}">{{ d[2] }}</option>
+            {% endfor %}
+        </select></td>
+    </tr>
+    <tr>
+      <td align="center" colspan="2"><input type="submit" name="button" id="button" class="btn btn-primary" value="Search" /></td>
+    </tr>
+  </table>
+  <p>&nbsp;</p>
+  <table class="table table-bordered">
+    <tr style="color: white" bgcolor="black" >
+      <th>S/No</th>
+      <th>Date</th>
+      <th>Course name</th>
+      <th>Year Of Admission</th>
+      <th>Semester</th>
+      <td> </td>
+    </tr>
+      {% for i in data %}
+<tr style="color: black" bgcolor="#a9a9a9">
+      <td>&nbsp;{{ loop.index }}</td>
+      <td>&nbsp;{{ i[6] }}</td>
+      <td>&nbsp;{{ i[8] }}</td>
+      <td>&nbsp;{{ i[7] }}</td>
+      <td>&nbsp;{{ i[4] }}</td>
+      <td>&nbsp;<a href="/update_request/{{ i[0] }}" class="btn btn-info">Accept</a></td>
+    </tr>
+      {% endfor %}
+  </table>
+  <p>&nbsp;</p>
+</form>
+</body>
+</html>
+{% endblock %}

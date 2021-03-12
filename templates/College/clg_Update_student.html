@@ -1,0 +1,118 @@
+{% extends '/College/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" enctype="multipart/form-data" action="/update_std">
+<script src="/static/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#depname").change(function () {
+            depid=$(this).val();
+            $.ajax({
+
+                url:'/clg_crs_by_dep_ajax',
+                type:'post',
+                data:{dep:depid},
+                success:function (res) {
+                    le=res.length;
+                    $("#couname").empty();
+                    for(var i=0;i<=le;i++)
+                    {
+                        courseid=res[i]["c_id"];
+                        coursenm=res[i]["c_name"];
+                        $("#couname").append('<option value='+courseid+'>'+coursenm+'</option>')
+                    }
+
+                    },error:function (error) {
+
+                }
+
+            });
+
+        });
+
+    });
+</script>
+ <table class="table table-bordered">
+    <tr>
+      <td>Student Name:</td>
+      <td><label for="stdname"></label>
+      <input type="text" name="stdname" id="stdname" value="{{ data[3] }}" class="form-control"/></td>
+    </tr>
+ <tr>
+      <td>Department Name:</td>
+      <td>
+      <select name="depname" id="depname" class="form-control">
+      <option value="selected" >select</option>
+          {% for d in data2 %}
+          <option value="{{ d[0] }}">{{ d[1] }}</option>
+          {% endfor %}
+      </select> </td>
+    </tr>
+
+    <tr><input type="hidden" name="stid" value="{{ data[0] }}">
+      <td>Course Name:</td>
+      <td><label for="couname"></label>
+     <select name="couname" id="couname" class="form-control">
+{#         {% for d in data2 %}#}
+{#         <option value="{{ d[1] }}" {% if d[1]==data[2] %} selected="selected"#}
+{#         {% endif %}>{{ d[0] }}</option>#}
+{#         {% endfor %}#}
+     </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Gender:</td>
+      <td><p>
+        <input type="radio" {% if data[4]=="male" %} checked="checked" {% endif %}  name="radio" id="gender" value="male" />Male<br>
+          <input type="radio" {% if data[4]=="female" %} checked="checked" {% endif %}  name="radio" id="gender2" value="female" />Female
+      </td>
+    </tr>
+    <tr>
+      <td><p>House Name:</p></td>
+      <td><input type="text" name="hname" id="hname" value="{{ data[5] }}" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Pin</td>
+      <td><input type="text" name="pin" id="pin" value="{{ data[7] }}" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Post</td>
+      <td><input type="text" name="post" id="post" value="{{ data[6] }}" class="form-control"/></td>
+    </tr>
+{#    <tr>#}
+{#      <td>Email</td>#}
+{#      <td><input type="text" name="email" id="email" value="{{ data[8] }}" class="form-control"/></td>#}
+{#    </tr>#}
+    <tr>
+      <td>Phone</td>
+      <td><input type="text" name="phone" id="phone" value="{{ data[14] }}" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Photo</td>
+      <td><input type="file" name="pic" id="pic" class="form-control"/></td>
+    </tr>
+     <tr>
+      <td>Sem</td>
+      <td><label for="sem"></label>
+        <select name="sem" id="sem" class="form-control">
+{#            <option >{{ data[11]  }}</option>#}
+            {% for i in range(1,7) %}
+          <option value="{{ i }}" {% if i==data[11] %} selected{% endif %}>{{ i }}</option>
+          {% endfor %}
+        </select>
+      <td>
+    </tr>
+  <tr>
+      <td>Batch</td>
+      <td>
+          <input type="text" name="batch" id="batch" value="{{ data[12] }}" class="form-control"/>
+      </td>
+  </tr>
+    <tr>
+     <td align="center" colspan="2"><input align="middle" type="submit" name="button" id="button" class="btn btn-primary" value="Update" /></td>
+    </tr>
+    </table>
+    </form>
+
+</body>
+</html>
+{% endblock %}

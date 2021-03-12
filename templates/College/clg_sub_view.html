@@ -1,0 +1,25 @@
+{% extends '/College/blank.html' %} {% block body %}
+<table class="table table-bordered">
+    <tr style="color: white" bgcolor="black">
+      <th>S/no</th>
+<!--      <th>Course Name</th>-->
+      <th>Subject</th>
+      <th>Subject Code</th>
+      <th>Semester</th>
+<!--     <td>&nbsp;</td>-->
+<!--     <td>&nbsp;</td>-->
+    </tr>
+       {% for i in data %}
+    <tr style="color: black" bgcolor="#a9a9a9">
+
+      <td>{{ loop.index }}</td>
+      <td>&nbsp;{{ i[2] }}</td>
+      <td>{{ i[3] }}</td>
+      <td>&nbsp;{{ i[4] }}</td>
+<!--        <td>{{ i[4] }}</td>-->
+<!--       <td><a href="/edit_sub/{{ i[3] }}" class="btn btn-info">Edit</a></td>-->
+<!--      <td><a href="/delete_sub/{{ i[3] }}" class="btn btn-danger">Delete</a></td>-->
+    </tr>
+      {% endfor %}
+  </table>
+{% endblock %}

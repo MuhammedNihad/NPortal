@@ -1,0 +1,27 @@
+{% extends '/admin/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="/adm_cou_mngmnt">
+  <table class="table table-bordered">
+    <tr>
+      <td>Department Name:</td>
+      <td>
+        <select name="dpt" id="dpt" class="form-control">
+            {% for d in data %}
+           <option value="{{ d[0] }}">{{ d[1] }}</option>
+            {% endfor %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td >Course Name:</td>
+      <td >
+      <input type="text" name="couname" id="couname" class="form-control" required pattern="[A-Z a-z]{3,25}"/></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><input type="submit" name="button" id="button" class="btn btn-success" value="Add" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

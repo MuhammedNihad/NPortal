@@ -1,0 +1,37 @@
+{% extends '/College/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="">
+  <table class="table table-bordered">
+    <tr style="color: white" bgcolor="black" >
+      <th>Sl. No</th>
+      <th>Photo</th>
+      <th>Name</th>
+      <th>Course</th>
+      <th>Gender</th>
+      <th>Email</th>
+      <th>phone</th>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+      {% for i in data %}
+    <tr style="color: black" bgcolor="#a9a9a9">
+      <td>&nbsp;{{ loop.index }}</td>
+      <td>&nbsp;<img src="{{ i[9] }}" height="100" width="100"> </td>
+      <td>&nbsp;{{ i[3] }}</td>
+      <td>&nbsp;
+          {% for d in data2 %}
+              {{ d }}
+              {% endfor %}
+      </td>
+      <td>&nbsp;{{ i[4] }}</td>
+      <td>&nbsp;{{ i[8] }}</td>
+      <td>&nbsp;{{ i[12] }}</td>
+      <td><a href="/edit_std/{{ i[0] }}" class="btn btn-info">View More</a></td>
+      <td><a href="/delete_std/{{ i[0] }}/{{i[10]}}" class="btn btn-danger">Delete</a></td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

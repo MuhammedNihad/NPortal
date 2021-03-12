@@ -1,0 +1,51 @@
+{% extends '/admin/blank.html' %} {% block body %}
+<form id="form1" name="form1" method="post" action="/adm_sub_alloc">
+  <table class="table table-bordered">
+    <tr>
+      <td>Course Name:</td>
+      <td>
+        <select name="cou" id="cou" class="form-control">
+            {% for d in data %}
+          <option value="{{ d[0] }}">{{ d[2] }}</option>
+            {% endfor %}
+      </select></td>
+    </tr>
+    <tr>
+      <td>Subject Name:</td>
+      <td>
+        <select name="sub" id="sub" class="form-control">
+            {% for d in data2 %}
+          <option value="{{ d[0] }}">{{ d[2] }}</option>
+            {% endfor %}
+        </select></td>
+    </tr>
+      <tr>
+      <td>Sem</td>
+      <td>
+        <select name="sem" id="sem" class="form-control">
+            {% for i in range(1,7) %}
+          <option value="{{ i }}">{{ i }}</option>
+          {% endfor %}
+        </select>
+      <td>
+    </tr><tr>
+      <td>Sem</td>
+      <td>
+        <select name="sem" id="sem" class="form-control">
+            {% for i in range(1,7) %}
+          <option value="{{ i }}">{{ i }}</option>
+          {% endfor %}
+        </select>
+      <td>
+    </tr>
+
+<tr>
+      <td colspan="2" align="center">
+        <input type="submit" name="button" id="button" value="Add" class="btn btn-primary"/>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

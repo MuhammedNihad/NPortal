@@ -1,0 +1,27 @@
+{% extends '/College/blank.html' %} {% block body %}
+<form action="/college_studymaterialsupload_post" method="post" enctype="multipart/form-data"  name="form1"  id="form1">
+  <table class="table table-bordered">
+
+
+
+
+
+
+    <tr>
+      <td>Topic name:</td>
+      <td>
+      <input type="text" name="topic" id="topic" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Choose file</td>
+      <td>
+      <input type="file" name="file" id="pin" class="form-control"/></td>
+    </tr>
+        <tr><td></td>
+      <td ><input type="submit" name="button" id="button" class="btn btn-primary" value="Register" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends '/College/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="/view_std_dpt">
+  <table class="table table-bordered">
+    <tr><input type="hidden" name="clg" value="{{ data[2] }}">
+      <td>Department</td>
+      <td>
+        <select name="dept" id="dept" class="form-control">
+        <option>select</option>
+            {% for d in data %}
+            <option value="{{ d[0] }}">{{ d[1] }}</option>
+            {% endfor %}
+        </select></td>
+    </tr>
+    <tr>
+      <td>Course</td>
+      <td>
+        <select name="cou" id="cou" class="form-control">
+            {#  {% for d in data2 %}
+            <option value="{{ d[0] }}">{{ d[1] }}</option>
+            {% endfor %}  #}
+        </select></td>
+    </tr>
+    <tr>
+      <td>Sem</td>
+      <td><label for="select13"></label>
+        <select name="sem" id="sem" class="form-control">
+            <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select></td>
+    </tr>
+    <tr>
+      <td align="center" colspan="2"><input type="submit" name="button" id="button" class="btn btn-primary" value="Submit" /></td>
+    </tr>
+  </table>
+  <p>&nbsp;</p>
+  <table class="table table-bordered">
+    <tr style="color: white" bgcolor="black" >
+      <th>S/No</th>
+      <th>Student Name</th>
+      <th>Course name</th>
+      <th>Gender</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Photo</th>
+      <td>&nbsp;</td>
+    </tr>
+      {% for i in data3 %}
+    <tr style="color: black" bgcolor="#a9a9a9">
+      <td>&nbsp;{{ loop.index }}</td>
+      <td>&nbsp;{{ i[0] }}</td>
+      <td>&nbsp;{{ i[1] }}</td>
+      <td>&nbsp;{{ i[2] }}</td>
+      <td>&nbsp;{{ i[3] }}</td>
+      <td>{{ i[4] }}</td>
+      <td>&nbsp;<img src="{{ i[5] }}" height="100" width="100"> </td>
+      <td><p><a href="/clg_std_view_internal/{{ i[6] }}" class="btn btn-info">Internal Mark</a></p>
+      <p><a href="/clg_std_view_external/{{ i[6] }}" class="btn btn-info">External Mark</a></p></td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+<script src="/static/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#dept").change(function () {
+             deptid=$(this).val();
+            $.ajax({
+                url:'/ajax_std_dpt',
+                type:'post',
+                data:{dept:deptid},
+                success:function (res) {
+                    le=res.length;
+                    $("#cou").empty();
+                    for(var i=0;i<le;i++)
+                    {
+                        courseid=res[i]["c_id"]
+                        coursenm=res[i]["c_name"]
+                        $("#cou").append("<option value="+courseid+">"+coursenm+"</option>");
+                    }
+
+                    },error:function (error) {
+
+                }
+
+            });
+
+        });
+
+    });
+</script>
+{% endblock %}

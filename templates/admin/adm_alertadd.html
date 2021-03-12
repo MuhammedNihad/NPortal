@@ -1,0 +1,20 @@
+{% extends '/admin/blank.html' %} {% block body %}
+<form id="form1" name="form1" method="post" action="/admin_Addnotification_post">
+  <table  class="table table-bordered">
+    <tr>
+      <td> Message</td>
+    </tr>
+    <tr>
+      <td>
+      <textarea class="form-control" name="notificaton" rows="10" cols="200"></textarea></td>
+    </tr>
+    <tr>
+      <td align="center" colspan="2">
+        <input type="submit" name="button" id="button"class="btn btn-primary" value="Add" />
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

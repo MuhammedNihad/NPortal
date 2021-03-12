@@ -1,0 +1,18 @@
+{% extends '/admin/blank.html' %} {% block body %}
+<form id="form1" name="form1" method="post" action="/adm_dep_mgmt_post">
+  <table  class="table table-bordered">
+    <tr>
+      <td> Department Name</td>
+      <td>
+      <input name="dptname" type="text" required="required" id="dptname" placeholder="Enter Department Name" pattern="[A-Z a-z]{2,25}" value=""  class="form-control"/></td>
+    </tr>
+    <tr>
+      <td align="center" colspan="2">
+        <input type="submit" name="button" id="button"class="btn btn-primary" value="Add" />
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

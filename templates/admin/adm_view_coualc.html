@@ -1,0 +1,28 @@
+{% extends '/admin/blank.html' %} {% block body %}
+<form id="form1" name="form1" method="post" action="/search_course">
+  <table class="table table-bordered">
+<!--      <table class="able table-bordered">-->
+      <tr>
+      <td><input type="text" name="ser" class="form-control"/></td>
+      <td><input type="submit" name="button" class="btn btn-info" value="search"/></td>
+    </tr>
+<!--      </table>-->
+    <tr style="color: white" bgcolor="black">
+      <th>Sl. No.</th>
+      <th>College Name</th>
+      <th>Course Name</th>
+{#        <td>&nbsp;</td>#}
+        <td>&nbsp;</td>
+    </tr>
+      {% for i in data %}
+    <tr style="color: black" bgcolor="#a9a9a9">
+      <td>&nbsp;{{ loop.index}}</td>
+      <td>{{ i[0] }}</td>
+      <td>{{ i[1] }}</td>
+{#      <td align="center"><a href="/edit_coualc/{{ i[3] }}" class="btn btn-info">edit</a></td>#}
+      <td align="center"><a href="/delete_coualc/{{ i[3] }}" class="btn btn-danger">Delete</a></td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+{% endblock %}

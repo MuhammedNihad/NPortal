@@ -1,0 +1,71 @@
+{% extends '/College/blank.html' %} {% block body %}
+<form action="/clg_stf_add" method="post" enctype="multipart/form-data"  name="form1" id="form1">
+  <table class="table table-bordered">
+    <tr>
+      <td width="21">Staff Name:</td>
+      <td width="44"><label for="stfname"></label>
+      <input type="text" name="stfname" id="stfname" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <td>Department Name:</td>
+      <td><select name="dep" class="form-control">
+          {% for i in data %}
+          <option value="{{ i[0] }}">{{ i[1] }}</option>
+          {% endfor %}
+      </select> </td>
+    </tr>
+    <tr>
+      <td>Gender:</td>
+      <td>
+          <input type="radio" name="radio" id="gender" value="Male" checked/>Male <br />
+        <input type="radio" name="radio" id="Female" value="Female" />Female
+      </td>
+    </tr>
+    <tr>
+      <td>House Name:</td>
+      <td><label for="houname"></label>
+      <input type="text" name="houname" id="houname" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <td>Pin:</td>
+      <td><label for="pin"></label>
+      <input type="text" name="pin" id="pin" pattern="[6][0-9]{5}" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <td><p>post:</p></td>
+      <td><label for="post"></label>
+      <input type="text" name="post" id="post" class="form-control"  required/></td>
+    </tr>
+    <tr>
+      <td>Phone number:</td>
+      <td><label for="phnum"></label>
+      <input type="text" name="phnum" id="phnum" class="form-control" pattern="[9876][0-9]{9}" required/></td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><label for="email"></label>
+      <input type="email" name="email" id="email" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <td>Qualification:</td>
+      <td><label for="qual"></label>
+      <input type="text" name="qual" id="qual" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <td>Experiance:</td>
+      <td><label for="exp"></label>
+      <input type="text" name="exp" id="exp" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <td>Photo:</td>
+      <td><label for="photo"></label>
+      <input type="file" name="photo" id="photo" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <td align="center" colspan="2"><input type="submit" name="button" id="button" class="btn btn-primary" value="Register" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

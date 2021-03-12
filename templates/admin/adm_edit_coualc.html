@@ -1,0 +1,61 @@
+{% extends '/admin/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="/update_coualc" class="form-control">
+  <table class="table table-bordered">
+    <tr>
+      <td>College Name:<input type="hidden" name="coualid" value="{{ data[3] }}" ></td>
+      <td>
+         <select name="clg" id="clg" class="form-control" required>
+         <option value="{{ data3[2] }}">{{ data3[0] }}</option>
+        {% for d in data %}
+            <option value="{{ d[8] }}">{{ d[1] }}</option>
+            {% endfor %}
+      </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Course Name:</td>
+      <td><label for="select2"></label>
+        <select name="cou" id="cou" class="form-control" required>
+{#            {% for d in data2 %}#}
+{#            <option value="{{ d[0] }}">{{ d[2] }}</option>#}
+{#            {% endfor %}#}
+      </select>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><center><input type="submit" name="button" id="button" class="btn btn-primary" value="Add" /></center></td>
+    </tr>
+  </table>
+</form>
+ <script src="/static/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#clg").change(function () {
+            colgid=$(this).val();
+            $.ajax({
+
+                url:'/course_by_clg',
+                type:'post',
+                data:{clg:colgid},
+                success:function (res) {
+                    le=res.length;
+                    $("#cou").empty();
+                    for(var i=0;i<=le;i++)
+                    {
+                        courseid=res[i]["c_id"];
+                        coursenm=res[i]["c_name"];
+                        $("#cou").append('<option value='+courseid+'>'+coursenm+'</option>')
+                    }
+
+                    },error:function (error) {
+
+                }
+
+            });
+
+        });
+
+    });
+</script>
+{% endblock %}

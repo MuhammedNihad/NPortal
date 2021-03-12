@@ -1,0 +1,42 @@
+{% extends '/admin/blank.html' %} {% block body %}
+<form id="form1" name="form1" method="post" action="/adm_acc_rej_clg">
+  <input type="hidden" name="logid" value="{{ data[8] }}">
+    <table class="table-bordered table">
+      <td>College Name:</td>
+      <td>&nbsp;{{ data[1] }}</td>
+    </tr>
+    <tr>
+      <td>Photo</td>
+      <td>&nbsp;<img src="{{ data[2] }}" width="90px" height="90px"> </td>
+    </tr>
+    <tr>
+      <td>Phone:</td>
+      <td>{{ data[3] }}</td>
+    </tr>
+    <tr>
+      <td>Post:</td>
+      <td>&nbsp;{{ data[5] }}</td>
+    </tr>
+    <tr>
+      <td>Pin:</td>
+      <td>&nbsp;{{ data[6] }}</td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td>&nbsp;{{ data[4] }}</td>
+    </tr>
+      <tr>
+      <td>Place:</td>
+      <td>&nbsp;{{ data[7] }}</td>
+    </tr>
+        {% if data[12]=='pending' %}
+        <tr>
+            <td><input type="submit" name="btn" value="ACCEPT" class="btn btn-success"/></td>
+            <td><input type="submit" name="btn" value="REJECT" class="btn btn-danger"/></td>
+        </tr>
+        {% endif %}
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

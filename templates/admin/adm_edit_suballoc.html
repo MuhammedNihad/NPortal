@@ -1,0 +1,56 @@
+{% extends '/admin/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="/update_suballoc">
+  <table class="table table-bordered">
+    <tr>
+            <td>Course Name:<input type="hidden" name="subalid" value="{{ data[4] }}"></td>
+      <td><label for="select2"></label>
+        <select name="cou" id="cou" class="form-control">
+        <option value={{ data[6] }}>{{ data[0] }}</option>
+
+
+            {% for d in data2 %}
+
+
+          <option value="{{ d[0] }}">{{ d[2] }}</option>
+
+            {% endfor %}
+
+
+        </select></td>
+    </tr>
+    <tr>
+      <td>Subject Name:</td>
+      <td><label for="select3"></label>
+        <select name="sub" id="sub" class="form-control">
+        <option value="{{ data[5] }}">{{ data[1] }}</option>
+            {% for d in data3 %}
+          <option value="{{ d[0] }}">{{ d[2] }}</option>
+            {% endfor %}
+        </select></td>
+    </tr>
+      <tr>
+      <td>Sem</td>
+      <td><label for="sem"></label>
+        <select name="sem" id="sem" class="form-control">
+            <option >{{ data[2]  }}</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      <td>
+    </tr>
+
+<tr>
+      <td colspan="2"><center>
+        <input type="submit" name="button" id="button" class="btn btn-primary" value="Update" />
+      </center></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

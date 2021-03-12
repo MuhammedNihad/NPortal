@@ -1,0 +1,45 @@
+{% extends '/College/blank.html' %} {% block body %}
+
+<form action="/update_placement" method="post" enctype="multipart/form-data" name="form1" id="form1">
+  <table class="table table-bordered">
+    <tr><input type="hidden" name="pid" value="{{ data[0] }}">
+      <td>Head Name:</td>
+      <td><input type="text" name="hdname" id="hdname" value="{{ data[1] }}" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Gender:</td>
+      <td><p>M
+        <input type="radio" {% if data[2]=="male" %} checked="checked" {% endif %} name="radio" id="male" value="male" />
+      </p>
+      <p>F
+        <input type="radio" {% if data[2]=="female" %} checked="checked" {% endif %} name="radio" id="female" value="female" />
+      </p></td>
+    </tr>
+    <tr>
+      <td>House name:</td>
+      <td><input type="text" name="hname" id="hname" value="{{ data[3] }}" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Post:</td>
+      <td><input type="text" name="post" id="post" value="{{ data[4] }}" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Pin:</td>
+      <td><input type="text" name="pin" id="pin" value="{{ data[5] }}" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Contact:</td>
+      <td><input type="text" name="cont" id="cont" value="{{ data[6] }}" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td>Photo:</td>
+      <td><input type="file" name="photo" id="photo" class="form-control"/></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><input type="submit" name="button" id="button" class="btn btn-primary" value="Update" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

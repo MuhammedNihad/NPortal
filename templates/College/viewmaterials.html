@@ -1,0 +1,22 @@
+
+{% extends '/College/blank.html' %} {% block body %}
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Title</th>
+        <th>Filename</th>
+        <th></th>
+    </tr>
+    {%  for i in data  %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ i[4]  }}</td>
+        <td>{{ i[2]  }}</td>
+        <td>{{ i[3]  }}</td>
+        <td><a href="/college_dltmaterial/{{ i[0] }}" class="btn btn-danger">Delete</a> </td>
+
+    </tr>
+    {% endfor  %}
+</table>
+{% endblock %}

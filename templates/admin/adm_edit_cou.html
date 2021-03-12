@@ -1,0 +1,24 @@
+{% extends '/admin/blank.html' %} {% block body %}
+<form id="form1" name="form1" method="post" action="/update_cou">
+  <table class="table table-bordered">
+    <tr>
+      <td>Department Name:<input type="hidden" name="cid" value="{{ data2[0] }}"/></td>
+      <td>
+        <select name="dpt" id="dpt" class="form-control">
+        <option value="{{ data2[2] }}">{{ data2[3] }}</option>
+            {% for d in data %}
+            <option value="{{ d[0]}}">{{ d[1] }}</option>
+            {% endfor %}
+      </select></td>
+    </tr>
+    <tr>
+      <td>Course Name:</td>
+      <td>
+      <input type="text" class="form-control" name="couname" id="couname" value="{{data2[1]}}" /></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><input type="submit" name="button" id="button" value="Update" class="btn btn-primary"/></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

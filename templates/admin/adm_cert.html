@@ -1,0 +1,33 @@
+{% extends '/admin/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="">
+
+  <table width="600" align="center">
+
+    <tr style="background-image: url('/static/cert_head.jpg');background-repeat: no-repeat; height: 250px;">
+      <td></td>
+    </tr>
+
+    <tr >
+      <td align="center"><h2>{{ res[0] }}</h2><br>
+          <b>whereas it has been certified by duly appointed Examiners that</b><br>
+          <strong><span style="font-size: 16px;">{{ res[1] }}</span></strong><br>
+          is qualified to receive <br>
+          the <span style="font-size: 16px;"><b>Degree of {{ res[2] }}</b></span><br><br>
+          The senate of the University of Calicut hereby confers on him<br>
+          the Degree of<br>
+          <span style="font-size: 18px;"><b>{{ res[2] }}</b></span><br>
+          with all rights,privileges and Honours thereunto appetaining.<br>
+          given under the seal of the university<br><br>
+      </td>
+    </tr>
+      <tr>
+          <td align="right"><img src="{{ data2 }}" height="150" width="150"/>&emsp;</td>
+      </tr>
+    <tr style="background-image: url('/static/cert_foot.jpg');background-repeat: no-repeat; height: 170px">
+      <td >
+      </td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends '/College/blank.html' %} {% block body %}
+
+<form id="form1" name="form1" method="post" action="">
+  <table class="table table-bordered">
+    <tr>
+      <td colspan="2"><img src="{{ i[2] }}" height="100" width="100"></td>
+    </tr>
+    <tr>
+      <td>College Name:</td>
+      <td>{{ i[1] }}</td>
+    </tr>
+    <tr>
+      <td>Phone number:</td>
+      <td>{{ i[3] }}</td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td>{{ i[4] }}</td>
+    </tr>
+    <tr>
+      <td>Pin:</td>
+      <td>{{ i[6] }}</td>
+    </tr>
+    <tr>
+      <td>Post:</td>
+      <td>{{ i[5] }}</td>
+    </tr>
+    <tr>
+      <td>Place:</td>
+      <td>{{ i[7] }}</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><a href="/clgeditprofile" class="btn btn-success">Edit College</a></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}
