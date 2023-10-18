@@ -13,13 +13,6 @@ app.secret_key="hh"
 static_path="D:\\Aproject\\NEWS PORTAL\\Web\\SecureID\\SecureID\\static\\"
 
 
-
-@app.route('/pubviewcolleges')
-def pubviewcolleges():
-    return render_template('pub_home.html')
-
-
-
 @app.route('/')
 def login():
     return render_template("login.html")
@@ -38,23 +31,22 @@ def admin_login():
                 return home()
             elif (d[3] == "college"):
                 session["clg_id"] = str(d[0])
-                print(session['clg_id'])
-                return college()
+                return home()
             elif (d[3] == "staff"):
                 session["stf_id"] = str(d[0])
-                return staff()
+                return home()
             elif (d[3] == "placement"):
                 session["pla_id"] = str(d[0])
-                return placement()
+                return home()
             elif (d[3] == "student"):
                 session["std_id"] = str(d[0])
-                return student()
+                return home()
             elif (d[3] == "company"):
                 session["cmp_id"] = str(d[0])
-                return company()
+                return home()
             elif (d[3] == "ceo"):
                 session["ce_id"] = str(d[0])
-                return ceo()
+                return home()
         else:
             return "<script> alert('Invalid username or password');window.location='/' </script>"
 
@@ -78,56 +70,11 @@ def college_studymaterialsupload():
 
 
 
-
-@app.route('/college')
-def college():
-    if session["logout"] == "1":
-        return render_template("College/college_home.html")
-    else:
-        return login()
-
-@app.route('/staff')
-def staff():
-    if session["logout"] == "1":
-        return render_template("Staff/staff_home.html")
-    else:
-        return login()
-
-@app.route('/placement')
-def placement():
-    if session["logout"] == "1":
-        return render_template("Placement cell/placement home.html")
-    else:
-        return login()
-
-@app.route('/student')
-def student():
-    if session["logout"] == "1":
-        return render_template("Student/student_home.html")
-    else:
-        return login()
-
-@app.route('/company')
-def company():
-    if session["logout"] == "1":
-        return render_template("Company/company_home.html")
-    else:
-        return login()
-
-@app.route('/ceo')
-def ceo():
-    return
-
-
-
-
 @app.route('/call_internal')
 def call_internal():
     if session["logout"]=="1":
         db=conn()
         cg=db.selectall('select * from college')
-        # dp=db.selectall('select * from department')
-        # co=db.selectall('select * from course')
         return render_template("admin/adm_call_internal.html", data=cg)
     else:
         return login()
@@ -170,8 +117,6 @@ def adm_view_internal():
     if session["logout"] == "1":
         db=conn()
         cg=db.selectall('select * from college')
-        # dp=db.selectall('select * from department')
-        # co=db.selectall('select * from course')
         return render_template("admin/adm_view_internal.html",data=cg)
     else:
         return login()
@@ -192,7 +137,6 @@ def adm_internal():
     cou=request.form['cou']
     sem=request.form['sem']
     session['sem']=sem
-    # sub=request.form['sub']
     se="select student.*,department.d_name,college.col_name from college,department,student where college.login_id=student.col_id and student.d_id=department.d_id and student.col_id='"+clg+"' and student.d_id='"+dep+"' and student.sem='"+sem+"'"
     c=conn()
     re=c.selectall(se)
@@ -268,8 +212,6 @@ def adm_cert_gen(stid):
     r3 = random.randint(00, 99)
     r4 = random.randint(00, 99)
     s=str(r1)+"#"+str(r2)+"#"+str(stid)+"#"+str(r3)+"#"+str(r4)+"#"
-    print("gg")
-    print(s)
 
     c=conn()
     import pyqrcode
@@ -280,10 +222,7 @@ def adm_cert_gen(stid):
 
     qry="select department.d_name,student.s_name,course.c_name from department,course,student where student.c_id=course.c_id and student.d_id=department.d_id and student.login_id='"+stid+"'"
     res=c.selectone(qry)
-    print(res)
     qr_path="/static/qr/"+stid+".svg"
-    # res1=c.selectall("select distinct(subject.sub_id) from subject,student where student.c_id=subject.c_id and student.login_id='"+stid+"'")
-    # print(res1[0])
     return render_template("admin/adm_cert.html",res=res,data2=qr_path)
 
 
@@ -312,10 +251,7 @@ def cou_allo():
     ca=conn()
     clg=request.form['clg']
     cou=request.form['cou']
-    print(clg,cou)
-
     qry="SELECT * FROM course_allocation WHERE col_id='"+clg+"' AND c_id='"+cou+"'"
-    print (qry)
     res=ca.selectone(qry)
     if res is not None:
         return "<script>alert('Course Already exists');window.location='/course'</script>"
@@ -346,26 +282,6 @@ def search_course():
     else:
         return login()
 
-
-# @app.route('/edit_coualc/<id>')
-# def edit_coualc(id):
-#     c = conn()
-#     co="select college.col_name,course.c_name,course_allocation.col_id,course_allocation.ca_id,course.c_id from course,course_allocation,college where course_allocation.ca_id='"+id+"' and college.login_id=course_allocation.col_id and course_allocation.c_id=course.c_id"
-#     cg = c.selectall('select * from college')
-#     cu="select * from course"
-#     col=c.selectone(co)
-#     cou=c.selectall(cu)
-#     return render_template("admin/adm_edit_coualc.html",data=cg,data2=cou,data3=col)
-#
-# @app.route('/update_coualc',methods=['post'])
-# def update_coualc():
-#     c = conn()
-#     col=request.form['colid']
-#     cou=request.form['cou']
-#     caid=request.form['coualid']
-#     de="update course_allocation set col_id='"+col+"',c_id='"+cou+"' where ca_id='"+caid+"'"
-#     c.nonreturn(de)
-#     return view_coual()
 
 @app.route('/delete_coualc/<id>')
 def del_coualc(id):
@@ -508,7 +424,6 @@ def adm_sub_alloc():
 def view_suballo():
     c=conn()
     zz="select course.c_name,subject.sub,subject_allocation.sem,subject_allocation.c_id,subject_allocation.subal_id from course,subject,subject_allocation where subject.sub_id=subject_allocation.sub_id and subject_allocation.c_id=course.c_id"
-    print(zz)
     so=c.selectall(zz)
     return render_template("admin/adm_view_suballoc.html",data=so)
 
@@ -533,7 +448,6 @@ def update_suballoc():
     subalid=request.form['subalid']
     c = conn()
     de="update subject_allocation set c_id='"+cu+"',sub_id='"+si+"',sem='"+se+"' where subal_id='"+subalid+"'"
-    print(de)
     c.nonreturn(de)
     return view_suballo()
 
@@ -613,17 +527,7 @@ def pubviewmore_clg(logid):
     r = c.selectone(bb)
     bb = "SELECT `course`.* FROM `course_allocation`,`course` WHERE `course_allocation`.`c_id`=`course`.`c_id` AND `course_allocation`.`col_id`='"+logid+"' "
     res = c.selectall(bb)
-    print(res)
     return render_template("pub_viwmore_college.html", data=r,data2=res)
-
-
-# @app.route('/pubviewmore_corses')
-# def pubviewmore_corses(did):
-#     c = conn()
-#     bb = "SELECT `course`.* FROM `course_allocation`,`course` WHERE `course_allocation`.`c_id`=`course`.`c_id` AND `course_allocation`.`col_id`='"+did+"' "
-#     r = c.selectall(bb)
-#     return render_template("View_more_courses.html", data=r)
-
 
 
 @app.route("/adm_acc_rej_clg",methods=['post'])
@@ -739,8 +643,6 @@ def add_ext():
     if session["logout"] == "1":
         db=conn()
         clg=db.selectall('select * from college')
-        # dep=db.selectall('select * from department')
-        # cou=db.selectall('select * from course')
         return render_template("admin/adm_add_ext.html",data3=clg)
     else:
         return login()
@@ -938,7 +840,6 @@ def update_data():
      else:
          ab = "update staff set st_name='" + sta + "',dep_name='" + dep + "',gender='" + gen + "',h_name='" + hou + "',pin='" + pi + "',post='" + po + "',ph_no='" + ph + "',qual='" + qu + "',experience='" + ex + "' where staf_id='" + stid + "'"
      ca.nonreturn(ab)
-     print(ab)
      return clg_view_staff()
 
 @app.route('/delete_staff/<id>')
@@ -964,7 +865,6 @@ def clg_view_cou():
 def clg_cou():
     c = conn()
     dept=request.form['dptname']
-    # session['dpt']=dept
     cc="select course.c_id,course.c_name from course,course_allocation where course.c_id=course_allocation.c_id and course_allocation.col_id='"+session["clg_id"]+"' and course.d_id='"+dept+"'"
     ce=c.selectall(cc)
     return render_template("College/clg_View course.html",data2=ce)
@@ -1028,9 +928,7 @@ def clg_internal():
     dept=request.form['cou']
     x=session['clg_id']
     cc= "select internal_requests.*,course.c_name from internal_requests,course where course.c_id=internal_requests.crs_id and internal_requests.crs_id='"+dept+"' and internal_requests.col_id='"+str(x)+"'"
-    print(cc)
     ce=c.selectall(cc)
-    print(ce)
     return render_template("College/clg_view_internalmark_request.html",data=ce)
 
 
@@ -1218,7 +1116,6 @@ def collegeviewsubjects_post():
     session["selsem"]=sem
 
     qry="SELECT * FROM `subject` WHERE `c_id`='"+cid+"' AND `sem`='"+sem+"'"
-    print(qry)
 
     res=d.selectall(qry)
     return render_template('/College/Collegeviewsubjects.html',crs=crs,ressubjects=res)
@@ -1256,7 +1153,6 @@ def college_studymaterialsupload_post():
 def college_studymaterialsupload_view():
     subid=session["selsubid"]
     qry="SELECT * FROM `studymaterials` WHERE `subid`='"+subid+"' "
-    print(qry)
     d=conn()
     res=d.selectall(qry)
     return render_template('/College/viewmaterials.html',data=res)
@@ -1345,9 +1241,7 @@ def ajax_dept_by_clg():
     c = conn()
     clg = request.form['clgid']
     ce = "select distinct(department.d_id),department.d_name from course_allocation,course,department where course_allocation.c_id=course.c_id and course.d_id=department.d_id and course_allocation.col_id='" + clg + "'"
-    print(ce)
     res = c.jsonsel(ce)
-    print(res)
     return jsonify(res)
 
 @app.route('/view_std_dpt',methods=['post'])
@@ -1370,7 +1264,6 @@ def clg_std_view_internal(sid):
         sem=session["selsemid"]
         ma="select subject.sub,sub_code,internals from subject,internal where internal.s_id='"+sid+"' and subject.sem='"+sem+"' and subject.sub_id=internal.sub_id"
         me=c.selectall(ma)
-        print(me)
         return render_template("College/clg_student_internal.html",data=me)
 
 @app.route('/clg_std_view_external/<sid>')
@@ -1427,14 +1320,12 @@ def add_mark():
     sub=request.form['sub']
     mark=request.form['mark']
     st_id=session['st']
-    print(st_id)
     c = conn()
     qr=c.selectone("select * from internal where s_id='"+st_id+"' and sub_id='"+sub+"'")
     if qr is None:
         it="insert into internal values(null,'"+st_id+"','"+sub+"','"+mark+"')"
     else:
         it = "update internal set internals='" + mark + "' where intrn_id='"+str(qr[0])+"'"
-    print(it)
     c.nonreturn(it)
     return stf_add_int(st_id)
 
@@ -1623,7 +1514,6 @@ def std_send_complaint():
         c = conn()
         st="select s_id from student where login_id='"+session["std_id"]+"'"
         sa=c.selectone(st)
-        print(sa)
         return render_template("Student/std_send_complaint.html",data=sa)
     else:
         return login()
@@ -1798,7 +1688,6 @@ def cmp_add_shortlist_post():
     elif btn=="CREATE SHORTLIST":
         ids=request.form.getlist("idd")
         for id in ids:
-            print("ID ",id)
             qry=c.nonreturn("update requests set status='approved' where r_id='"+id+"'")
             qry2=c.selectone("select v_id,s_id from requests where r_id='"+id+"'")
             qry3=c.nonreturn("insert into shortlist(s_id,v_id) values('"+str(qry2[1])+"','"+str(qry2[0])+"')")
@@ -1863,9 +1752,7 @@ def cmp_add_ceo():
       if re is None:
           ce="insert into ceo values(null,'"+con+"','"+va+"','"+hn+"','"+po+"','"+pi+"','"+pl+"','"+ph+"','"+em+"','"+path+"','"+str(log)+"','"+str(session['cmp_id'])+"')"
       else:
-          print(re[0])
           ce="update ceo set ceo_name='"+con+"',gender='"+va+"',h_name='"+hn+"',post='"+po+"',pin='"+pi+"',place='"+pl+"',phone='"+ph+"',photo='"+path+"',login_id='"+str(log)+"' where ceo_id='"+str(re[0])+"'"
-      print(ce)
       c.nonreturn(ce)
       return "<script>alert('CEO Registered');window.location='/cmp_ceo_managemnt';</script>"
 
@@ -1934,7 +1821,6 @@ def verify():
 
 
     qr=request.form["qr"]
-    print(qr)
 
     qry="select photo from student where login_id='"+qr+"'"
     cn=conn()
@@ -1956,11 +1842,9 @@ def verify():
         result = CF.face.detect(img_url)
         result2 = CF.face.detect(img_ur2)
 
-        print(result)
 
         similarity = CF.face.verify(result[0]['faceId'], result2[0]['faceId'])
 
-        print(similarity['isIdentical'])
 
         if similarity['isIdentical'] == False:
             return jsonify(status="no")
@@ -1979,7 +1863,6 @@ def and_login():
     qry="select * from login where username='"+usr+"' and password='"+psw+"' and type='student'"
     c=conn()
     res=c.selectone(qry)
-    print(res)
     if res is not None:
         qry="select * from student where login_id='"+str(res[0])+"'"
         rek=c.selectone(qry)
@@ -2009,9 +1892,7 @@ def and_view_profile():
 def up_profile():
     lid=request.form['lid']
     name=request.form['name']
-    print(name)
     hn=request.form['hn']
-    print(hn)
     post=request.form['p']
     pin=request.form['pin']
     email=request.form['em']
@@ -2031,13 +1912,11 @@ def up_profile():
                 fh.write(a)
                 fh.close()
                 qry="update student set s_name='"+name+"',h_name='"+hn+"',post='"+post+"',pin='"+pin+"',email='"+email+"',photo='"+path+"' where login_id='"+str(lid)+"'"
-                print(qry)
                 c=conn()
                 res=c.nonreturn(qry)
                 return jsonify(status='ok')
             else:
                 qry = "update student set s_name='" + name + "',h_name='" + hn + "',post='" + post + "',pin='" + pin + "',email='" + email + "' where login_id='" + str(lid) + "'"
-                print(qry)
                 c = conn()
                 res = c.nonreturn(qry)
                 return jsonify(status='ok')
@@ -2045,7 +1924,6 @@ def up_profile():
         else:
             qry = "update student set s_name='" + name + "',h_name='" + hn + "',post='" + post + "',pin='" + pin + "',email='" + email + "' where login_id='" + str(
                 lid) + "'"
-            print(qry)
             c = conn()
             res = c.nonreturn(qry)
             return jsonify(status='ok')
@@ -2053,17 +1931,9 @@ def up_profile():
     else:
         qry = "update student set s_name='" + name + "',h_name='" + hn + "',post='" + post + "',pin='" + pin + "',email='" + email + "' where login_id='" + str(
             lid) + "'"
-        print(qry)
         c = conn()
         res = c.nonreturn(qry)
         return jsonify(status='ok')
-
-
-
- 
-
-# @app.route("/and_view_student",methods=['post'])
-# def and_view_student():
 
 
 @app.route('/logout')
@@ -2168,7 +2038,6 @@ def and_newdiscussion():
 def and_viewalldiscusion():
     d=conn()
     qry="SELECT `discussion`.*,`student`.* FROM `discussion` INNER JOIN `student` ON `student`.`login_id`=`discussion`.`studentid`"
-    print(qry)
     res=d.jsonsel(qry)
     return jsonify(status='ok',res=res)
 
@@ -2209,16 +2078,11 @@ def clg_view_articles():
     return render_template('College/view_article.html',res=res)
 
 
-
-
-############################################################added own
-
 @app.route('/and_vieallcommentsbydid',methods=['POST'])
 def and_vieallcommentsbydid():
     did=request.form["did"]
     db=conn()
     qry="SELECT `comments`.*,`student`.*  FROM comments,student WHERE `comments`.`studentid`=`student`.`login_id` AND `comments`.`disid`='"+did+"'"
-    print(qry)
     res=db.jsonsel(qry)
     return jsonify(status="ok",res=res)
     
@@ -2239,7 +2103,6 @@ def and_Viewsubjects():
     d=conn()
     lid=request.form["uid"]
     qry="SELECT * FROM `subject` WHERE `c_id` IN (SELECT `c_id` FROM `student` WHERE `login_id`='"+lid+"')"
-    print(qry)
     res=d.jsonsel(qry)
     return jsonify(status="ok",data=res)
 
@@ -2256,10 +2119,8 @@ def and_viewmaterials():
 @app.route('/and_viewallarticles',methods=['post'])
 def and_viewallarticles():
     qry="SELECT `article`.*,`student`.* FROM article,student WHERE article.`student_id`=`student`.`login_id`"
-    print(qry)
     d=conn()
     res=d.jsonsel(qry)
-    print()
     return jsonify(status='ok',res=res)
 
 
@@ -2277,7 +2138,6 @@ def and_deletearticle():
 @app.route('/delcomp',methods=['post'])
 def delcomp():
     id=request.form["cid"]
-    print(id)
     d=conn()
     d.nonreturn("delete from complaint where cm_id='"+id+"'")
     return jsonify(status="ok")
@@ -2298,7 +2158,6 @@ def and_vieallcomments_article_byaid():
     did=request.form["did"]
     db=conn()
     qry="SELECT `comments_art`.*,`student`.*  FROM comments_art,student WHERE `comments_art`.`studentid`=`student`.`login_id` AND `comments_art`.`aid`='"+did+"'"
-    print(qry)
     res=db.jsonsel(qry)
     return jsonify(status="ok",res=res)
 
@@ -2367,14 +2226,9 @@ def and_newarticle():
     lid=request.form["lid"]
     msg=request.form["msg"]
     filecon=request.form["file"]
-    print(lid,msg)
-    print(filecon)
     import time
     timestr = time.strftime("%Y%m%d-%H%M%S")
     import base64
-    # with open("D:\\Imp\\Lik Secure ID\\SecureID\\static\\"+timestr+".jpg", "wb") as fh:
-    #     fh.write(base64.decodebytes(filecon))
-
     a=base64.b64decode(filecon)
     fh = open("D:\\Aproject\\NEWS PORTAL\\Web\\SecureID\\SecureID\\static\\article\\"+str(timestr)+".jpg", "wb")
     fh.write(a)
