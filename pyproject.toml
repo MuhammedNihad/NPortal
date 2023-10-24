@@ -1,0 +1,24 @@
+[tool.black]
+line-length = 79
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+)/'''
+
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.bandit]
+exclude_dirs = ["*/venv/*", "tests"]
+skips = ["B201", "B104", "B105", "B106", "B311", "B608"]
