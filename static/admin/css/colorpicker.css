@@ -163,12 +163,11 @@
 	background-position: bottom;
 }
 
-.colorselector { 
-	display: inline-block; height: 28px; width: 28x; vertical-align: middle; 
-	position: relative; vertical-align: middle; margin-left: 5px; 
+.colorselector {
+	display: inline-block; height: 28px; width: 28x; vertical-align: middle;
+	position: relative; vertical-align: middle; margin-left: 5px;
 }
-.colorselector span { 
+.colorselector span {
 	display: block; height: 28px; width: 28px; position: absolute; left: 0; top: 0; cursor: pointer;
-	background: #000 url(../images/colorpicker/select2.png) no-repeat -4px -4px; 
+	background: #000 url(../images/colorpicker/select2.png) no-repeat -4px -4px;
 }
-

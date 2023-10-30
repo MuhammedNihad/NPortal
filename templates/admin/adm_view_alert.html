@@ -6,14 +6,14 @@
         <th>Date</th>
       <th>Notification</td>
       <td>&nbsp;</td>
-   
+
     </tr>
       {% for i in data %}
     <tr style="color: black" bgcolor="#a9a9a9">
      <td>{{ loop.index }}</td>
       <td>{{ i[2] }}</td>
       <td>{{ i[1] }}</td>
-    
+
       <td><a href="/delete_alert/{{ i[0] }}" class="btn btn-danger">Delete</a></td>
     </tr>
       {% endfor %}
