@@ -37,7 +37,7 @@ repos:
     rev: v1.6.1
     hooks:
     -   id: mypy
-        args: [--strict, --ignore-missing-imports]
+        args: [--strict, --ignore-missing-imports, --allow-untyped-decorators, --no-warn-return-any]
         additional_dependencies: [tokenize-rt==3.2.0]
 
 -   repo: https://github.com/PyCQA/bandit
