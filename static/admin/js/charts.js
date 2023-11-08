@@ -1,7 +1,7 @@
 jQuery(document).ready(function() {
-    
+
     "use strict";
-    
+
     function showTooltip(x, y, contents) {
 	jQuery('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css( {
 	    position: 'absolute',
@@ -10,12 +10,12 @@ jQuery(document).ready(function() {
 	    left: x + 5
 	}).appendTo("body").fadeIn(200);
     }
-    
+
     /*****SIMPLE CHART*****/
-    
+
     var firefox = [[0, 9], [1, 7], [2,10], [3, 8], [4, 10], [5, 5], [6, 8]];
     var chrome = [[0, 7], [1, 5], [2,8], [3, 6], [4, 8], [5, 3], [6, 6]];
-	
+
     var plot = jQuery.plot(jQuery("#basicflot"),
 	[{
 	    data: firefox,
@@ -63,43 +63,43 @@ jQuery(document).ready(function() {
 		color: '#eee'
 	    }
 	});
-		
+
 	var previousPoint = null;
 	jQuery("#basicflot").bind("plothover", function (event, pos, item) {
 	jQuery("#x").text(pos.x.toFixed(2));
 	jQuery("#y").text(pos.y.toFixed(2));
-			
+
 	if(item) {
 	    if (previousPoint != item.dataIndex) {
 		previousPoint = item.dataIndex;
-						
+
 		jQuery("#tooltip").remove();
 		var x = item.datapoint[0].toFixed(2),
 		y = item.datapoint[1].toFixed(2);
-	 			
+
 		showTooltip(item.pageX, item.pageY,
 		item.series.label + " of " + x + " = " + y);
 	    }
-			
+
 	} else {
 	    jQuery("#tooltip").remove();
-	    previousPoint = null;            
+	    previousPoint = null;
 	}
-		
+
     });
-		
+
     jQuery("#basicflot").bind("plotclick", function (event, pos, item) {
 	if (item) {
 	    plot.highlight(item.series, item.datapoint);
 	}
     });
-    
-    
+
+
     /***** USING OTHER SYMBOLS *****/
-    
+
     var firefox = [[0, 5], [1, 8], [2,6], [3, 11], [4, 7], [5, 13], [6, 9], [7,8], [8,10], [9,9],[10,13]];
     var chrome = [[0, 3], [1, 6], [2,4], [3, 9], [4, 5], [5, 11], [6, 7], [7,6], [8,8], [9,7],[10,11]];
-	
+
     var plot2 = jQuery.plot(jQuery("#basicflot2"),
 		[ { data: firefox,
           label: "Firefox",
@@ -152,40 +152,40 @@ jQuery(document).ready(function() {
           max: 10
         }
 		});
-		
+
 	 var previousPoint2 = null;
 	 jQuery("#basicflot2").bind("plothover", function (event, pos, item) {
       jQuery("#x").text(pos.x.toFixed(2));
       jQuery("#y").text(pos.y.toFixed(2));
-			
+
 		if(item) {
 		  if (previousPoint2 != item.dataIndex) {
 			 previousPoint2 = item.dataIndex;
-						
+
 			 jQuery("#tooltip").remove();
 			 var x = item.datapoint[0].toFixed(2),
 			 y = item.datapoint[1].toFixed(2);
-	 			
+
 			 showTooltip(item.pageX, item.pageY,
 				  item.series.label + " of " + x + " = " + y);
 		  }
-			
+
 		} else {
 		  jQuery("#tooltip").remove();
-		  previousPoint2 = null;            
+		  previousPoint2 = null;
 		}
-		
+
 	 });
-		
+
 	 jQuery("#basicflot2").bind("plotclick", function (event, pos, item) {
 		if (item) {
 		  plot2.highlight(item.series, item.datapoint);
 		}
 	 });
-    
-    
+
+
     /***** TRACKING WITH CROSSHAIR *****/
-    
+
     var sin = [], cos = [];
 	 for (var i = 0; i < 14; i += 0.1) {
         sin.push([i, Math.sin(i)]);
@@ -280,14 +280,14 @@ jQuery(document).ready(function() {
 				updateLegendTimeout = setTimeout(updateLegend, 50);
 		  }
 	 });
-    
-    
+
+
     /***** REAL TIME UPDATES *****/
-    
+
     var data = [], totalPoints = 50;
 
 	 function getRandomData() {
-        
+
         if (data.length > 0)
 				data = data.slice(1);
 
@@ -296,7 +296,7 @@ jQuery(document).ready(function() {
 
             var prev = data.length > 0 ? data[data.length - 1] : 50,
                 y = prev + Math.random() * 10 - 5;
-    
+
             if (y < 0) {
                 y = 0;
             } else if (y > 100) {
@@ -313,7 +313,7 @@ jQuery(document).ready(function() {
 		  return res;
 	 }
 
-	 
+
     // Set up the control widget
 	 var updateInterval = 1000;
 
@@ -351,16 +351,16 @@ jQuery(document).ready(function() {
 	 }
 
 	 update();
-    
-    
+
+
     /***** BAR CHART *****/
-    
+
     var bardata = [ ["Jan", 10], ["Feb", 23], ["Mar", 18], ["Apr", 13], ["May", 17], ["Jun", 30], ["Jul", 26], ["Aug", 16], ["Sep", 17], ["Oct", 5], ["Nov", 8], ["Dec", 15] ];
 
 	 jQuery.plot("#barchart", [ bardata ], {
 		  series: {
             lines: {
-              lineWidth: 1  
+              lineWidth: 1
             },
 				bars: {
 					show: true,
@@ -380,10 +380,10 @@ jQuery(document).ready(function() {
 				tickLength: 0
 		  }
 	 });
-    
-    
+
+
     /***** PIE CHART *****/
-    
+
     var piedata = [
         { label: "Series 1", data: [[1,10]], color: '#D9534F'},
         { label: "Series 2", data: [[1,30]], color: '#1CAF9A'},
@@ -391,7 +391,7 @@ jQuery(document).ready(function() {
         { label: "Series 4", data: [[1,70]], color: '#428BCA'},
         { label: "Series 5", data: [[1,80]], color: '#5BC0DE'}
 	 ];
-    
+
     jQuery.plot('#piechart', piedata, {
         series: {
             pie: {
@@ -410,14 +410,14 @@ jQuery(document).ready(function() {
             clickable: true
         }
     });
-    
+
     function labelFormatter(label, series) {
 		return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
 	}
-   
-   
+
+
    /***** MORRIS CHARTS *****/
-   
+
    var m1 = new Morris.Line({
         // ID of the element in which to draw the chart.
         element: 'line-chart',
@@ -440,7 +440,7 @@ jQuery(document).ready(function() {
         hideHover: 'auto',
 	resize: true
     });
-   
+
     var m2 = new Morris.Area({
         // ID of the element in which to draw the chart.
         element: 'area-chart',
@@ -464,7 +464,7 @@ jQuery(document).ready(function() {
         smooth: false,
         hideHover: true
     });
-    
+
     var m3 = new Morris.Bar({
         // ID of the element in which to draw the chart.
         element: 'bar-chart',
@@ -487,7 +487,7 @@ jQuery(document).ready(function() {
         smooth: false,
         hideHover: true
     });
-    
+
     var m4 = new Morris.Bar({
         // ID of the element in which to draw the chart.
         element: 'stacked-chart',
@@ -512,7 +512,7 @@ jQuery(document).ready(function() {
         stacked: true,
         hideHover: true
     });
-    
+
     var m5 = new Morris.Donut({
         element: 'donut-chart',
         data: [
@@ -521,7 +521,7 @@ jQuery(document).ready(function() {
           {label: "Mail-Order Sales", value: 20}
         ]
     });
-    
+
     var m6 = new Morris.Donut({
         element: 'donut-chart2',
         data: [
@@ -534,47 +534,47 @@ jQuery(document).ready(function() {
         colors: ['#D9534F','#1CAF9A','#428BCA','#5BC0DE','#428BCA']
     });
 
-    
+
     /***** SPARKLINE CHARTS *****/
-    
+
     jQuery('#sparkline').sparkline([4,3,3,1,4,3,2,2,3], {
-		  type: 'bar', 
+		  type: 'bar',
 		  height:'30px',
         barColor: '#428BCA'
     });
-    
+
     jQuery('#sparkline2').sparkline([4,3,3,1,4,3,2,2,3], {
-		  type: 'line', 
+		  type: 'line',
 		  height:'33px',
         width: '50px',
         lineColor: false,
         fillColor: '#1CAF9A'
     });
-    
+
     jQuery('#sparkline3').sparkline([4,3,3,1,4,3,2,2,3], {
-		  type: 'pie', 
+		  type: 'pie',
 		  height:'33px',
         sliceColors: ['#F0AD4E','#428BCA','#D9534F','#1CAF9A','#5BC0DE']
     });
-    
+
     jQuery('#sparkline4').sparkline([4,3,3,5,4,3,2,5,3], {
-		  type: 'line', 
+		  type: 'line',
 		  height:'33px',
         width: '50px',
         lineColor: '#5BC0DE',
         fillColor: false
     });
-    
+
     jQuery('#sparkline4').sparkline([3,6,6,2,6,5,3,2,1], {
-		  type: 'line', 
+		  type: 'line',
 		  height:'33px',
         width: '50px',
         lineColor: '#D9534F',
         fillColor: false,
         composite: true
     });
-    
-    
+
+
     var delay = (function() {
 	var timer = 0;
 	return function(callback, ms) {
@@ -593,5 +593,5 @@ jQuery(document).ready(function() {
 	    m6.redraw();
 	}, 200);
     }).trigger('resize');
-  
+
 });

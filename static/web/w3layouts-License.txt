@@ -6,7 +6,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 */
 ----------------------------------
-NOTE : FREQUENTLY ASKED QUESTIONS 
+NOTE : FREQUENTLY ASKED QUESTIONS
 ----------------------------------
 
 1. What is W3layouts?
@@ -39,7 +39,7 @@ NOTE : FREQUENTLY ASKED QUESTIONS
 
 7. Do I need a separate version for Smartphones and Tablets?
 
-	No, WEB Template is compatible in all web browsers, Smartphones and Tablets. 
+	No, WEB Template is compatible in all web browsers, Smartphones and Tablets.
 
 8. Do I need any database?
 
@@ -52,4 +52,3 @@ NOTE : FREQUENTLY ASKED QUESTIONS
 10. Under which license you are providing these templates?
 
 	W3layouts templates are under Creative Commons Attribution 3.0 unported
-

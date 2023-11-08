@@ -29,8 +29,8 @@ img{max-width:100%;}
 /*-- end reset --*/
 body {
 	font-family: 'Hind', sans-serif;
-} 
-/*-- main --*/ 
+}
+/*-- main --*/
 
 h1 {
 	font-size: 45px;
@@ -68,7 +68,7 @@ h1 {
     -webkit-animation: slideleft 20000s infinite linear;
     background-size: cover;
 	-webkit-background-size:cover;
-	-moz-background-size:cover; 
+	-moz-background-size:cover;
     background-attachment: fixed;
     position: relative;
 	min-height: 100vh;
@@ -331,7 +331,7 @@ h3 a {
     line-height: 1.8em;
 }
 .copyright p a{
-    color: #fff; 
+    color: #fff;
 	-webkit-transition: 0.5s all;
 	-moz-transition: 0.5s all;
 	-o-transition: 0.5s all;
@@ -341,10 +341,10 @@ h3 a {
 /*-- //copyright --*/
 /*-- //main --*/
 
-/*-- responsive-design --*/ 
+/*-- responsive-design --*/
 
 @media(max-width:667px){
-	
+
 	h1 {
 		font-size: 40px;
 		letter-spacing: 3px;
@@ -352,7 +352,7 @@ h3 a {
 }
 
 @media(max-width:415px){
-	
+
 	h1 {
 		font-size: 35px;
 		letter-spacing: 3px;
@@ -381,5 +381,5 @@ h3 a {
 	h1 {
 		font-size: 30px;
 	}
-} 
+}
 /*-- //responsive-design --*/

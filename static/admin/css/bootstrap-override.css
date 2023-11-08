@@ -907,7 +907,7 @@ h4, .h4 {
 
 .table thead .table-head-alt th {
    text-transform: uppercase;
-   font-size: 12px; 
+   font-size: 12px;
 }
 
 .table tbody tr td .progress {
@@ -933,5 +933,3 @@ h4, .h4 {
    border-bottom-left-radius: 3px;
    border-bottom-right-radius: 3px;
 }
-
-

@@ -9,7 +9,7 @@
  * http://www.opensource.org/licenses/GPL-2.0
  */
 (function($, document) {
-	
+
 	"use strict";
 
 	var pluses = /\+/g;
@@ -59,7 +59,7 @@
 	};
 
 	$.cookie.defaults = {};
-	
+
 	$.removeCookie = function (key, options) {
 		if ($.cookie(key) !== undefined) {
 			// Must not alter options, thus extending a fresh object...

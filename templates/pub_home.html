@@ -1,7 +1,7 @@
 {% extends '/blank.html' %} {% block body %}
 <form id="form1" name="form1" method="post">
- 
-   
+
+
     <br>
     <br>
      <table class="table table-bordered">
@@ -15,10 +15,10 @@
          <th>&nbsp;District</th>
            <th>State</th>
            <th></th>
-       
+
        </tr>
          {% for i in data %}
-   
+
    <tr style="color: black" bgcolor="#a9a9a9">
          <td>{{ loop.index }}</td>
          <td>{{ i[1] }}</td>
@@ -35,7 +35,7 @@
          {% endfor %}
      </table>
    </form>
-   
+
 
 
 
