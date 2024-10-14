@@ -4,7 +4,7 @@ exclude: README.md
 
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v5.0.0
     hooks:
     -   id: trailing-whitespace
     -   id: end-of-file-fixer
@@ -15,7 +15,7 @@ repos:
 
     # Using this mirror lets us use mypyc-compiled black, which is about 2x faster
 -   repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 23.10.1
+    rev: 24.10.0
     hooks:
     -   id: black
         # It is recommended to specify the latest version of Python
@@ -25,32 +25,32 @@ repos:
         # language_version: python3.11
 
 -   repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
+    rev: 5.13.2
     hooks:
     -   id: isort
         name: isort (python)
 
 -   repo: https://github.com/PyCQA/flake8
-    rev: 6.1.0
+    rev: 7.1.1
     hooks:
     -   id: flake8
 
 -   repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.6.1
+    rev: v1.11.2
     hooks:
     -   id: mypy
         args: [--strict, --ignore-missing-imports, --allow-untyped-decorators, --no-warn-return-any]
         additional_dependencies: [tokenize-rt==3.2.0]
 
 -   repo: https://github.com/PyCQA/bandit
-    rev: 1.7.5
+    rev: 1.7.10
     hooks:
     -   id: bandit
         args: ["-c", "pyproject.toml"]
         additional_dependencies: ["bandit[toml]"]
 
 -   repo: https://github.com/asottile/pyupgrade
-    rev: v3.15.0
+    rev: v3.18.0
     hooks:
     -   id: pyupgrade
 
